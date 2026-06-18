@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDA 去中心化交易所 | AAS 代币</title>
+    <meta name="description" content="GDA去中心化交易所 - 基于BNB智能链的AAS代币交易平台，支持推荐返佣">
+    <meta name="keywords" content="GDA, AAS, DeFi, BSC, 去中心化交易所, 代币">
+    <link rel="icon" type="image/png" href="data:image/png;base64,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">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --gold: #D4A843;
+            --gold-light: #F0D68A;
+            --dark: #0D0D0D;
+            --dark2: #1A1A2E;
+            --dark3: #16213E;
+            --text: #E8E8E8;
+            --text-dim: #9A9A9A;
+            --accent: #E94560;
+            --green: #4CAF50;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(13,13,13,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212,168,67,0.15);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--gold);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .navbar-brand img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* 英雄区 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background: radial-gradient(ellipse at 50% 30%, rgba(212,168,67,0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 80%, rgba(233,69,96,0.05) 0%, transparent 50%),
+                        var(--dark);
+        }
+        .hero-logo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 60px rgba(212,168,67,0.25);
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: 4px;
+        }
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), #C4942E);
+            color: var(--dark);
+            box-shadow: 0 4px 20px rgba(212,168,67,0.35);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(212,168,67,0.5);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+        }
+        .btn-secondary:hover {
+            background: rgba(212,168,67,0.1);
+            transform: translateY(-2px);
+        }
+
+        /* 统计数据 */
+        .stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        /* 代币信息区 */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        .section-title span {
+            color: var(--gold);
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+
+        .token-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .token-logo-section {
+            text-align: center;
+        }
+        .token-logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 40px rgba(212,168,67,0.2);
+        }
+        .token-logo-label {
+            color: var(--gold);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .token-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold-light);
+        }
+        .token-details {
+            list-style: none;
+        }
+        .token-details li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            justify-content: space-between;
+        }
+        .token-details .label {
+            color: var(--text-dim);
+        }
+        .token-details .value {
+            color: var(--text);
+            font-weight: 500;
+        }
+        .token-details .value.addr {
+            font-family: "Courier New", monospace;
+            font-size: 0.82rem;
+            color: var(--gold);
+        }
+
+        /* 交易区 */
+        .trade-section {
+            background: linear-gradient(180deg, var(--dark2), var(--dark));
+            padding: 5rem 2rem;
+        }
+        .trade-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(26,26,46,0.8);
+            border: 1px solid rgba(212,168,67,0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+        }
+        .trade-card h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+        }
+        .trade-card p {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+        }
+
+
+        .btn-trade {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 40px;
+            border-radius: 14px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-decoration: none;
+            background: linear-gradient(135deg, var(--gold), #C4942E);
+            color: var(--dark);
+            box-shadow: 0 4px 25px rgba(212,168,67,0.4);
+            transition: all 0.3s;
+        }
+        .btn-trade:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(212,168,67,0.55);
+        }
+
+        /* 推荐返佣 */
+        .referral-section {
+            padding: 5rem 2rem;
+            background: var(--dark);
+        }
+        .referral-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .referral-card {
+            background: rgba(26,26,46,0.6);
+            border: 1px solid rgba(212,168,67,0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .referral-card:hover {
+            border-color: rgba(212,168,67,0.3);
+            transform: translateY(-4px);
+        }
+        .referral-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .referral-card h3 {
+            color: var(--gold-light);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .referral-card p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* 操作指南 */
+        .howto-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, var(--dark), var(--dark2));
+        }
+        .steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .step {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+        .step-num {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), #C4942E);
+            color: var(--dark);
+            font-weight: 800;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .step-content h4 {
+            font-size: 1.15rem;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+        .step-content p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        /* 合约地址 */
+        .contract-section {
+            padding: 3rem 2rem;
+            background: var(--dark2);
+            text-align: center;
+        }
+        .contract-box {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(13,13,13,0.6);
+            border: 1px solid rgba(212,168,67,0.15);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .contract-label {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        .contract-addr {
+            font-family: "Courier New", monospace;
+            color: var(--gold);
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+        .btn-copy {
+            padding: 8px 18px;
+            border-radius: 8px;
+            background: rgba(212,168,67,0.15);
+            color: var(--gold);
+            border: 1px solid rgba(212,168,67,0.3);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+        .btn-copy:hover {
+            background: rgba(212,168,67,0.25);
+        }
+
+        /* 页脚 */
+        .footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: var(--dark);
+            border-top: 1px solid rgba(212,168,67,0.1);
+        }
+        .footer p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero .subtitle { font-size: 1rem; }
+            .token-grid { grid-template-columns: 1fr; }
+            .referral-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .stats { gap: 1.5rem; }
+            .trade-card { padding: 2rem 1.5rem; }
+            .contract-box { flex-direction: column; text-align: center; }
+        }
+
+        /* 小动画 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- 导航栏 -->
+<nav class="navbar">
+    <a href="#" class="navbar-brand">
+        <img src="data:image/jpeg;base64,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" alt="GDA">
+        GDA
+    </a>
+    <ul class="nav-links">
+        <li><a href="#trade">交易</a></li>
+        <li><a href="#token">代币</a></li>
+        <li><a href="#referral">推荐返佣</a></li>
+        <li><a href="#howto">操作指南</a></li>
+        <li><a href="#contract">合约</a></li>
+    </ul>
+</nav>
+
+<!-- 英雄区 -->
+<section class="hero" id="home">
+    <img src="data:image/jpeg;base64,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" alt="GDA Logo" class="hero-logo">
+    <h1>GDA</h1>
+    <p class="subtitle">基于 BNB 智能链的去中心化交易所<br>安全 · 透明 · 推荐返佣</p>
+    <div class="hero-buttons">
+        <a href="#trade" class="btn btn-primary">🚀 立即交易</a>
+        <a href="#howto" class="btn btn-secondary">📖 操作指南</a>
+    </div>
+    <div class="stats">
+        <div class="stat-item">
+            <div class="stat-value">2,100万</div>
+            <div class="stat-label">AAS 总发行量</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">BSC</div>
+            <div class="stat-label">BNB智能链</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">15%</div>
+            <div class="stat-label">卖税返佣池</div>
+        </div>
+    </div>
+</section>
+
+<!-- 交易区 -->
+<section class="trade-section fade-in" id="trade">
+    <div class="trade-card">
+        <h2>⚡ 开始交易</h2>
+        <p>GDA 交易所 — BNB 智能链上的去中心化交易平台，钱包直连，无需注册</p>
+        
+        <a href="https://gdadex.dexkit.app/swap" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="btn-trade">
+            ⚡ 前往 GDA 交易所
+        </a>
+        <p style="margin-top:1rem; font-size:0.85rem; color:var(--text-dim);">
+            点击后将在新窗口打开 GDA 交易所，连接 BSC 钱包即可交易 AAS 等代币
+        </p>
+    </div>
+</section>
+
+<!-- 代币信息 -->
+<section class="section fade-in" id="token">
+    <h2 class="section-title">AAS <span>代币</span></h2>
+    <p class="section-subtitle">GDA 平台原生代币，基于 BEP-20 标准</p>
+    <div class="token-grid">
+        <div class="token-logo-section">
+            <img src="data:image/jpeg;base64,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" alt="AAS Logo" class="token-logo">
+            <div class="token-logo-label">AAS 代币 · 玉玺</div>
+        </div>
+        <div class="token-info">
+            <h3>代币详情</h3>
+            <ul class="token-details">
+                <li>
+                    <span class="label">代币名称</span>
+                    <span class="value">AAS (AAS_V2)</span>
+                </li>
+                <li>
+                    <span class="label">标准</span>
+                    <span class="value">BEP-20 (BSC)</span>
+                </li>
+                <li>
+                    <span class="label">总供应量</span>
+                    <span class="value">21,000,000 AAS</span>
+                </li>
+                <li>
+                    <span class="label">卖税</span>
+                    <span class="value">15%（进入奖金池）</span>
+                </li>
+                <li>
+                    <span class="label">买税</span>
+                    <span class="value">0%</span>
+                </li>
+                <li>
+                    <span class="label">交易对</span>
+                    <span class="value">AAS / USDT</span>
+                </li>
+                <li>
+                    <span class="label">流动性</span>
+                    <span class="value">GDA Exchange</span>
+                </li>
+                <li>
+                    <span class="label">推荐返佣</span>
+                    <span class="value">✅ 支持</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- 推荐返佣 -->
+<section class="referral-section fade-in" id="referral">
+    <h2 class="section-title">推荐 <span>返佣</span></h2>
+    <p class="section-subtitle">分享 AAS，赚取返佣奖励</p>
+    <div class="referral-grid">
+        <div class="referral-card">
+            <div class="referral-icon">🤝</div>
+            <h3>单层直推</h3>
+            <p>推荐好友交易 AAS，获得其卖税返佣奖励，合法合规</p>
+        </div>
+        <div class="referral-card">
+            <div class="referral-icon">💰</div>
+            <h3>奖金池</h3>
+            <p>每笔卖出交易 15% 税费进入奖金池，用于返佣分配</p>
+        </div>
+        <div class="referral-card">
+            <div class="referral-icon">🔗</div>
+            <h3>链上透明</h3>
+            <p>所有交易和返佣记录均上链可查，合约代码已验证公开</p>
+        </div>
+    </div>
+</section>
+
+<!-- 操作指南 -->
+<section class="howto-section fade-in" id="howto">
+    <h2 class="section-title">操作 <span>指南</span></h2>
+    <p class="section-subtitle">三步开始交易</p>
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>安装钱包</h4>
+                <p>安装 MetaMask 浏览器插件，切换到 BSC 主网。推荐使用 Chrome 浏览器。</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>充值 BNB / USDT</h4>
+                <p>从币安或 OKX 等交易所转出 BNB 或 USDT 到你的 MetaMask 钱包地址。</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>开始交易</h4>
+                <p>点击上方「前往 GDA 交易所」按钮，连接钱包，选择代币对即可交易。</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">+</div>
+            <div class="step-content">
+                <h4>添加 AAS 代币到钱包</h4>
+                <p>在 MetaMask 中点击「导入代币」，粘贴 AAS 合约地址即可显示余额。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 合约地址 -->
+<section class="contract-section fade-in" id="contract">
+    <h2 class="section-title" style="margin-bottom:1.5rem;">合约 <span>地址</span></h2>
+    
+    <div class="contract-box" style="margin-bottom: 1rem;">
+        <div>
+            <div class="contract-label">AAS_V2 代币合约</div>
+            <div class="contract-addr" id="aasAddr">0x25B9a3ff1bB2360da0147414142A365d3096e7B3</div>
+        </div>
+        <button class="btn-copy" onclick="copyAddr('aasAddr')">复制</button>
+    </div>
+    
+    <div class="contract-box" style="margin-bottom: 1rem;">
+        <div>
+            <div class="contract-label">AAS/USDT LP 合约</div>
+            <div class="contract-addr" id="lpAddr">0xE08055cDe99a8a96CC2Cf7E56994BC917Ca18937</div>
+        </div>
+        <button class="btn-copy" onclick="copyAddr('lpAddr')">复制</button>
+    </div>
+    
+    <div class="contract-box">
+        <div>
+            <div class="contract-label">AAS_ReferralV2 推荐合约</div>
+            <div class="contract-addr" id="refAddr">0xA1Ff6Ea00a4a65171679Ec58889aE2fE91053E03</div>
+        </div>
+        <button class="btn-copy" onclick="copyAddr('refAddr')">复制</button>
+    </div>
+    
+    <p style="margin-top:1.5rem; color:var(--text-dim); font-size:0.85rem;">
+        ✅ 所有合约已在 BscScan 验证通过，源码公开可查
+    </p>
+</section>
+
+<!-- 页脚 -->
+<footer class="footer">
+    <p>
+        © 2026 GDA 去中心化交易所 · 基于 BNB 智能链 · 
+        <a href="https://bscscan.com/address/0x25B9a3ff1bB2360da0147414142A365d3096e7B3" target="_blank">BscScan 查看</a>
+    </p>
+    <p style="margin-top:0.5rem; font-size:0.75rem;">
+        本平台仅为代币信息展示页面，交易由 GDA 交易所智能合约执行。投资有风险，请谨慎决策。
+    </p>
+</footer>
+
+<script>
+// 复制合约地址
+function copyAddr(id) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        const orig = btn.textContent;
+        btn.textContent = '已复制 ✓';
+        btn.style.background = 'rgba(76,175,80,0.2)';
+        btn.style.borderColor = 'rgba(76,175,80,0.5)';
+        btn.style.color = '#4CAF50';
+        setTimeout(() => {
+            btn.textContent = orig;
+            btn.style.background = '';
+            btn.style.borderColor = '';
+            btn.style.color = '';
+        }, 2000);
+    });
+}
+
+
+
+// 滚动动画
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// 平滑滚动
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+</script>
+
+</body>
+</html>
