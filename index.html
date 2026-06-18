@@ -524,7 +524,30 @@
             color: var(--text-dim);
         }
         .panel-label { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 0.8rem; }
-        .panel-hint { color: var(--text-dim); font-size: 0.9rem; }
+        .panel-hint-default {
+            color: var(--text);
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+        }
+        .panel-hint-sub {
+            color: var(--text-dim);
+            font-size: 0.88rem;
+            margin-bottom: 0.5rem;
+        }
+        .panel-code {
+            font-family: "Courier New", monospace;
+            color: var(--gold);
+            font-size: 0.82rem;
+            background: rgba(212,168,67,0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            word-break: break-all;
+        }
+        .panel-label-sub {
+            color: var(--text-dim);
+            font-size: 0.88rem;
+            margin-bottom: 0.8rem;
+        }
         .panel-notice { line-height: 1.7; }
         .panel-status { margin-top: 0.6rem; font-size: 0.88rem; color: var(--gold); }
         .highlight-addr { color: var(--gold); font-family: "Courier New", monospace; font-size: 0.85rem; }
@@ -732,13 +755,18 @@
         <!-- 注册推荐关系 -->
         <div class="referral-panel">
             <h3>🔗 注册推荐关系</h3>
+            <!-- 无ref参数时显示默认提示 -->
+            <div id="defaultReferrerHint">
+                <p class="panel-hint-default">👇 你还没有推荐人，需要通过上级的推荐链接（?ref=钱包地址）访问本页面，才能注册推荐关系。</p>
+                <p class="panel-hint-sub">如果你已有推荐码，将推荐链接复制到浏览器打开即可。例如：<br>
+                <code class="panel-code">https://wenge6011.github.io/gda-website/?ref=0x你的推荐人地址</code></p>
+            </div>
+            <!-- 有ref参数时显示注册按钮 -->
             <div id="referrerInfo" style="display:none;">
-                <p class="panel-label">你的推荐人：<span id="referrerAddr" class="highlight-addr"></span></p>
+                <p class="panel-label">✅ 检测到推荐人：<span id="referrerAddr" class="highlight-addr"></span></p>
+                <p class="panel-label-sub">连接你的钱包，点击下方按钮完成注册</p>
                 <button onclick="registerReferral()" id="registerBtn" class="panel-btn">🦊 连接钱包并注册</button>
                 <p id="registerStatus" class="panel-status"></p>
-            </div>
-            <div id="noReferrer">
-                <p class="panel-hint">请通过推荐链接访问本页面（链接格式：?ref=0x钱包地址），即可注册推荐关系</p>
             </div>
         </div>
 
@@ -886,19 +914,15 @@ let currentWallet = null;
     const params = new URLSearchParams(window.location.search);
     const ref = params.get('ref');
     if (ref && ref.startsWith('0x') && ref.length === 42) {
+        // 有ref参数 → 显示注册面板
         document.getElementById('referrerAddr').textContent = ref;
         document.getElementById('referrerInfo').style.display = 'block';
-        document.getElementById('noReferrer').style.display = 'none';
-        // 存到localStorage，防止用户在页面内导航丢失
+        document.getElementById('defaultReferrerHint').style.display = 'none';
         localStorage.setItem('gda_referrer', ref);
     } else {
-        // 检查localStorage
-        const saved = localStorage.getItem('gda_referrer');
-        if (saved) {
-            document.getElementById('referrerAddr').textContent = saved;
-            document.getElementById('referrerInfo').style.display = 'block';
-            document.getElementById('noReferrer').style.display = 'none';
-        }
+        // 无ref参数 → 显示默认提示
+        document.getElementById('referrerInfo').style.display = 'none';
+        document.getElementById('defaultReferrerHint').style.display = 'block';
     }
 })();
 
