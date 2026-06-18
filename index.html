@@ -525,6 +525,7 @@
         }
         .panel-label { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 0.8rem; }
         .panel-hint { color: var(--text-dim); font-size: 0.9rem; }
+        .panel-notice { line-height: 1.7; }
         .panel-status { margin-top: 0.6rem; font-size: 0.88rem; color: var(--gold); }
         .highlight-addr { color: var(--gold); font-family: "Courier New", monospace; font-size: 0.85rem; }
         .highlight-gold { color: var(--gold) !important; font-weight: 700; }
@@ -708,8 +709,8 @@
     <!-- 交互区域 -->
     <div class="referral-panels" style="max-width:900px; margin:2.5rem auto 0;">
 
-        <!-- 生成推荐链接 -->
-        <div class="referral-panel">
+        <!-- 生成推荐链接（只有已注册用户可见）-->
+        <div class="referral-panel" id="genLinkPanel" style="display:none;">
             <h3>📋 生成我的推荐链接</h3>
             <div class="panel-row">
                 <input type="text" id="myWalletInput" placeholder="输入你的 BSC 钱包地址（0x...）" class="panel-input">
@@ -723,6 +724,9 @@
                 </div>
                 <p class="result-tip">分享此链接，好友通过链接注册即可建立推荐关系</p>
             </div>
+        </div>
+        <div id="noRegMsg" class="panel-notice" style="display:none; background:rgba(233,69,96,0.1); border:1px solid rgba(233,69,96,0.3); border-radius:12px; padding:1.2rem; text-align:center; color:var(--text-dim); font-size:0.92rem; margin-top:1rem;">
+            ⚠️ 你的钱包尚未建立推荐关系，无法生成推荐链接。<br>请通过上级的推荐链接注册后，再来生成你自己的推荐码。
         </div>
 
         <!-- 注册推荐关系 -->
@@ -874,6 +878,9 @@ const REFERRAL_ABI = [
     "function isRegistered(address) external view returns (bool)"
 ];
 
+// 当前连接的钱包地址
+let currentWallet = null;
+
 // 检测URL中的推荐参数
 (function initReferral() {
     const params = new URLSearchParams(window.location.search);
@@ -895,19 +902,59 @@ const REFERRAL_ABI = [
     }
 })();
 
-// 连接MetaMask/TP钱包获取地址
+// 连接MetaMask/TP钱包获取地址，并检查是否已注册
 async function fillWalletFromMetaMask(inputId) {
     if (typeof window.ethereum === 'undefined') {
         alert('未检测到钱包！请安装 MetaMask 或使用 TP 钱包内置浏览器访问。');
         return;
     }
     try {
+        await ensureBSC();
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         if (accounts.length > 0) {
-            document.getElementById(inputId).value = accounts[0];
+            const addr = accounts[0];
+            currentWallet = addr;
+            document.getElementById(inputId).value = addr;
+            // 检查该钱包是否已注册
+            await checkWalletRegistration(addr);
         }
     } catch (e) {
-        alert('连接钱包失败：' + (e.message || e));
+        if (e.code !== 4001) { // 4001 = 用户拒绝
+            alert('连接钱包失败：' + (e.message || e));
+        }
+    }
+}
+
+// 检查钱包是否已注册（是否有推荐人）
+async function checkWalletRegistration(addr) {
+    const genPanel = document.getElementById('genLinkPanel');
+    const noRegMsg = document.getElementById('noRegMsg');
+    
+    try {
+        const provider = new ethers.JsonRpcProvider('https://bsc-dataseed.binance.org/');
+        const contract = new ethers.Contract(REFERRAL_CONTRACT, REFERRAL_ABI, provider);
+        const info = await contract.getReferralInfo(addr);
+        const [referrer, registered] = info;
+        
+        // 判断：已注册 且 有推荐人（不是自己）→ 显示生成链接
+        const hasReferrer = referrer !== '0x0000000000000000000000000000000000000000';
+        
+        if (registered && hasReferrer) {
+            // ✅ 已注册且有推荐人 → 显示生成链接
+            if (genPanel) genPanel.style.display = 'block';
+            if (noRegMsg) noRegMsg.style.display = 'none';
+        } else {
+            // ❌ 未注册或没有推荐人 → 隐藏生成链接
+            if (genPanel) genPanel.style.display = 'none';
+            if (noRegMsg) {
+                noRegMsg.style.display = 'block';
+                noRegMsg.innerHTML = '⚠️ 你的钱包尚未建立推荐关系，无法生成推荐链接。<br>请通过上级的推荐链接注册后，再来生成你自己的推荐码。';
+            }
+        }
+    } catch (e) {
+        console.log('查询注册状态失败', e);
     }
 }
 
@@ -924,14 +971,34 @@ function generateRefLink() {
     document.getElementById('refLinkResult').style.display = 'block';
 }
 
-// 复制推荐链接
+// 复制推荐链接（兼容TP钱包）
 function copyRefLink() {
     const text = document.getElementById('refLinkText').textContent;
-    navigator.clipboard.writeText(text).then(() => {
-        const btn = event.target;
-        btn.textContent = '已复制 ✓';
-        setTimeout(() => { btn.textContent = '复制链接'; }, 2000);
-    });
+    if (!text) return;
+    
+    // 优先用navigator.clipboard，备用createTextRange
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = event.target;
+            btn.textContent = '已复制 ✓';
+            setTimeout(() => { btn.textContent = '复制链接'; }, 2000);
+        }).catch(() => fallbackCopy(text));
+    } else {
+        fallbackCopy(text);
+    }
+}
+
+function fallbackCopy(text) {
+    const input = document.createElement('input');
+    input.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+    input.value = text;
+    document.body.appendChild(input);
+    input.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(input);
+    const btn = event.target;
+    btn.textContent = '已复制 ✓';
+    setTimeout(() => { btn.textContent = '复制链接'; }, 2000);
 }
 
 // 确保在BSC主网
@@ -996,6 +1063,15 @@ async function registerReferral() {
             status.style.color = '#E94560';
             btn.textContent = '已完成';
             return;
+        }
+
+        // 注册成功后，更新UI：隐藏注册区，显示生成链接
+        const referrerAddr = document.getElementById('referrerAddr').textContent.trim();
+        if (referrerAddr && myAddr.toLowerCase() !== referrerAddr.toLowerCase()) {
+            const genPanel = document.getElementById('genLinkPanel');
+            const noRegMsg = document.getElementById('noRegMsg');
+            if (genPanel) genPanel.style.display = 'block';
+            if (noRegMsg) noRegMsg.style.display = 'none';
         }
 
         const tx = await contract.register(referrer);
