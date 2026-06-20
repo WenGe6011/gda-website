@@ -1105,7 +1105,7 @@ async function registerReferral() {
         await tx.wait();
         status.textContent = '✅ 注册成功！推荐关系已建立，交易即可产生返佣';
         status.style.color = '#4CAF50';
-        btn.textContent = '✅ 注册成功';
+        btn.textContent = '✅ 注册成功'; localStorage.removeItem('gda_referrer');
     } catch (e) {
         let msg = e.reason || e.message || '未知错误';
         if (msg.includes('Already registered')) msg = '该钱包已注册过推荐关系';
