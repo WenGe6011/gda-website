@@ -965,7 +965,7 @@ async function checkWalletRegistration(addr) {
         // 判断：已注册 且 有推荐人（不是自己）→ 显示生成链接
         const hasReferrer = referrer !== '0x0000000000000000000000000000000000000000';
         
-        if (registered && hasReferrer) {
+        if (registered) {
             // ✅ 已注册且有推荐人 → 显示生成链接
             if (genPanel) genPanel.style.display = 'block';
             if (noRegMsg) noRegMsg.style.display = 'none';
