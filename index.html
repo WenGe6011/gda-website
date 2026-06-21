@@ -924,6 +924,18 @@ let currentWallet = null;
         document.getElementById('referrerInfo').style.display = 'none';
         document.getElementById('defaultReferrerHint').style.display = 'block';
     }
+ const staleData = localStorage.getItem('gda_referrer');
+    if (staleData && staleData !== ref) {
+        const btn = document.createElement('button');
+        btn.textContent = '清除残留推荐数据';
+        btn.style.cssText = 'margin-top:0.8rem; padding:8px 16px; border-radius:8px; background:rgba(233,69,96,0.15); color:#E94560; border:1px solid rgba(233,69,96,0.3); cursor:pointer; font-size:0.85rem;';
+        btn.onclick = function() {
+            localStorage.removeItem('gda_referrer');
+            location.reload();
+        };
+        document.getElementById('defaultReferrerHint').appendChild(btn);
+    }
+    
 })();
 
 // 连接MetaMask/TP钱包获取地址，并检查是否已注册
