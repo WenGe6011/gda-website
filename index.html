@@ -121,7 +121,7 @@
         .hero .subtitle {
             font-size: 1.25rem;
             color: var(--text-dim);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2.5rem;            
             max-width: 600px;
         }
         .hero-buttons {
@@ -299,6 +299,44 @@
             box-shadow: 0 8px 35px rgba(212,168,67,0.55);
         }
 
+        .btn-trade-gda {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 40px;
+            border-radius: 14px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-decoration: none;
+            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            color: #fff;
+            box-shadow: 0 4px 25px rgba(139,92,246,0.4);
+            transition: all 0.3s;
+        }
+        .btn-trade-gda:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(139,92,246,0.55);
+        }
+        .trade-divider {
+            border-top: 1px dashed rgba(212,168,67,0.3);
+            margin: 2rem 0;
+        }
+        .trade-tip-box {
+            margin-top: 0.8rem;
+            padding: 0.8rem 1rem;
+            background: rgba(212,168,67,0.1);
+            border: 1px solid rgba(212,168,67,0.3);
+            border-radius: 10px;
+            text-align: left;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+        .trade-tip-box p {
+            margin: 0 0 0.3rem 0;
+        }
+        .trade-tip-box p:last-child {
+            margin-bottom: 0;
+        }
         /* 推荐返佣 */
         .referral-section {
             padding: 5rem 2rem;
