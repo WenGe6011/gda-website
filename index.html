@@ -689,18 +689,45 @@
 <!-- 交易区 -->
 <section class="trade-section fade-in" id="trade">
     <div class="trade-card">
-        <h2>⚡ 开始交易</h2>
-        <p>GDA 交易所 — BNB 智能链上的去中心化交易平台，钱包直连，无需注册</p>
+               <h2>⚡ 开始交易</h2>
+        <p>两种方式均可交易 AAS，选择适合你的即可</p>
         
-        <a href="https://pancakeswap.finance/swap?outputCurrency=0xb25DCc35F8eA38815832AdEcC87010BA3B0cf058&inputCurrency=0x55d398326f99059fF775485246999027B3197955" 
-           target="_blank" 
-           rel="noopener noreferrer"            
-           class="btn-trade">
-            ⚡ 在 PancakeSwap 交易 AAS
-        </a>
-        <p style="margin-top:1rem; font-size:0.85rem; color:var(--text-dim);">
-            点击后将在新窗口打开 PancakeSwap，自动选择 AAS_V4/USDT 交易对，连接 BSC 钱包即可交易
-        </p>
+        <!-- 方式一：PancakeSwap -->
+        <div style="margin-bottom:1.5rem;">
+            <a href="https://pancakeswap.finance/swap?outputCurrency=0xb25DCc35F8eA38815832AdEcC87010BA3B0cf058&inputCurrency=0x55d398326f99059fF775485246999027B3197955" 
+               target="_blank" 
+               rel="noopener noreferrer"           
+               class="btn-trade">
+                ⚡ 在 PancakeSwap 交易 AAS
+            </a>
+            <p style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-dim);">
+                自动选择 AAS_V4/USDT 交易对，连接 BSC 钱包即可交易
+            </p>
+            <p style="font-size:0.8rem; color:#E2A241; font-weight:600;">
+                💡 请在网络环境较好的区域进行 SWAP 交易
+            </p>
+        </div>
+        
+        <div class="trade-divider"></div>
+        
+        <!-- 方式二：GDA 交易所 -->
+        <div>
+            <a href="https://gdadex.dexkit.app/swap" 
+               target="_blank" 
+               rel="noopener noreferrer"           
+               class="btn-trade-gda">
+                🔗 在 GDA 交易所交易 AAS
+            </a>
+            <p style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-dim);">
+                打开即可交易，连接 BSC 钱包即可使用
+            </p>
+            <div class="trade-tip-box">
+                <p style="color:#E2A241; font-weight:700; font-size:0.95rem;">⚠️ 重要提示：</p>
+                <p>1️⃣ 请交易前确认交易代币</p>
+                <p>2️⃣ 点击交易代币，选择正确的代币 <b style="color:#8B5CF6;">AAS（V4）</b></p>
+                <p>3️⃣ 核对交易数据，再点击 SWAP 进行交易</p>
+            </div>
+        </div>
     </div>
 </section>
 
